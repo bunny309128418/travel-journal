@@ -1,8 +1,48 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e9eee8"><link rel="manifest" href="manifest.webmanifest"><title>旅途手帐</title><style>
 :root{--bg:#f7f8f5;--card:#fff;--ink:#283b34;--sub:#78877e;--accent:#4f7865;--line:#e1e8e1;--radius:18px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}button,input,textarea,select{font:inherit}button{cursor:pointer}header{padding:30px 18px 22px;background:#e9eee8}header>div,main{max-width:1060px;margin:auto}h1{font-size:30px;margin:0}header p{margin:8px 0;color:#64786d}main{padding:16px 14px 90px}.nav{display:flex;gap:8px;overflow:auto;padding:4px 0 14px}.nav button{white-space:nowrap;border:1px solid var(--line);background:white;padding:12px 14px;border-radius:13px;color:var(--ink)}.nav button.on,.primary{background:var(--accent)!important;color:white!important;border-color:var(--accent)!important}.pane{display:none}.pane.on{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:19px;margin-bottom:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.spread{justify-content:space-between}.muted{color:var(--sub);font-size:13px}.btn{border:1px solid var(--line);background:white;color:var(--ink);border-radius:11px;padding:10px 13px;min-height:43px}.danger{color:#a94c4c}.field{display:grid;gap:5px;flex:1;min-width:170px;font-size:13px}input,textarea,select{width:100%;border:1px solid #d5e0d8;background:#fff;color:var(--ink);border-radius:10px;padding:11px;font-size:16px}textarea{min-height:75px}h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:0 0 10px}.item{padding:10px 0;border-bottom:1px solid #eef1ed;display:flex;align-items:center;gap:10px}.item:last-child{border:0}.item input[type=checkbox]{width:21px;height:21px;accent-color:var(--accent)}.item span{flex:1;min-width:0;overflow-wrap:anywhere}.done{text-decoration:line-through;color:#99a49d}.pill{background:#edf3ed;border-radius:20px;padding:5px 10px;font-size:12px}.hero{background:#dce9df;border-radius:18px;padding:22px;margin-bottom:14px}.hero h2{font-size:24px}progress{width:100%;height:12px;accent-color:var(--accent)}.hidden{display:none!important}.trip{border-left:4px solid var(--accent)}.days{display:grid;gap:12px}.day{border-left:3px solid #b5cbb9;padding-left:14px}.sectionTitle{margin:14px 0 9px;font-weight:650}.toast{padding:10px 12px;border-radius:12px;background:#e7f0e7;margin:10px 0}.warn{background:#fff1df}.tiny{font-size:12px}.swatches{display:flex;gap:9px}.swatch{width:40px;height:40px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 1px #d7ddd7}.swatch:focus{outline:2px solid #222}a{color:var(--accent)}@media(min-width:850px){.layout{display:grid;grid-template-columns:240px 1fr;gap:18px}.nav{display:flex;flex-direction:column;align-self:start;position:sticky;top:12px}.nav button{text-align:left}.card{padding:23px}}@media(max-width:420px){header{padding-top:22px}h1{font-size:26px}.card{padding:15px}}
+
+.packing-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.packing-list .item {
+  min-width: 0;
+  padding: 4px 8px;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--bg);
+  line-height: 1.35;
+}
+
+.packing-list .item input[type="checkbox"] {
+  flex: 0 0 21px;
+  margin: 0;
+}
+
+.packing-list .item .btn {
+  flex: none;
+  padding: 4px 7px;
+  white-space: nowrap;
+}
+
+@media (max-width: 540px) {
+  .packing-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 330px) {
+  .packing-list {
+    grid-template-columns: 1fr;
+  }
+}
 </style></head><body><header><div><div class="muted" id="subtitle">YOUR TRAVEL JOURNAL</div><h1 id="appTitle">旅途手帐 🌿</h1><p>把期待的旅程，慢慢过成珍藏的回忆。</p></div></header><main><div class="layout"><nav class="nav" id="nav"><button class="on" data-tab="home">🏡 旅行总览</button><button data-tab="trips">🗺️ 我的旅行</button><button data-tab="packing">🧳 物品清单</button><button data-tab="guides">📖 攻略与交通</button><button data-tab="memories">📸 旅行记录</button><button data-tab="editor">🎨 可视化编辑</button><button data-tab="settings">☁️ 账号与备份</button></nav><div><section class="pane on" id="home"><div class="hero"><div class="muted">下一段旅程</div><h2 id="heroTitle">北海道 · 雪与温泉</h2><div id="heroInfo"></div><div class="row" style="margin-top:14px"><button class="btn primary" data-go="trips">查看旅行</button><button class="btn" data-go="packing">准备行李</button></div></div><div class="grid"><div class="card"><h2>我的旅行足迹</h2><div id="stats"></div></div><div class="card"><h2>最近的旅行</h2><div id="recent"></div></div></div></section>
 <section class="pane" id="trips"><div class="card"><div class="row spread"><h2>我的旅行</h2><button class="btn primary" id="addTrip">＋ 新建旅行</button></div><div id="tripList"></div></div><div class="card"><h2>编辑当前旅行</h2><label class="field">选择旅行<select id="tripSelect"></select></label><div class="grid" style="margin-top:12px"><label class="field">名称<input id="tripName"></label><label class="field">目的地<input id="tripDest"></label><label class="field">开始日期<input type="date" id="tripStart"></label><label class="field">结束日期<input type="date" id="tripEnd"></label><label class="field">气候<select id="tripWeather"><option value="cold">寒冷</option><option value="mild">温和</option><option value="hot">炎热</option><option value="rain">多雨</option></select></label><label class="field">活动（逗号分隔，如温泉,城市,摄影）<input id="tripActivities"></label></div><label class="field" style="margin-top:10px">酒店及行程备注<textarea id="tripNotes"></textarea></label><div class="row" style="margin-top:12px"><button class="btn primary" id="saveTrip">保存旅行</button><button class="btn" id="generate">✨ 一键生成物品清单</button><button class="btn danger" id="deleteTrip">删除旅行</button></div></div></section>
-<section class="pane" id="packing"><div class="card"><div class="row spread"><h2>本次旅行物品清单</h2><select id="packTrip" style="max-width:230px"></select></div><div id="packProgress"></div><div class="row" style="margin:12px 0"><input id="newPack" placeholder="添加本次专属物品" style="flex:1;min-width:150px"><button class="btn primary" id="addPack">添加</button><button class="btn" id="regen">重新生成并保留自定义项</button></div><div id="packItems"></div></div><div class="card"><h2>通用物品库</h2><p class="muted">这里的修改会用于未来旅行，不会自动改变已经生成的清单。</p><div class="row"><input id="newBase" placeholder="添加通用物品" style="flex:1"><button class="btn" id="addBase">添加</button></div><div id="baseItems"></div></div></section>
+<section class="pane" id="packing"><div class="card"><div class="row spread"><h2>本次旅行物品清单</h2><select id="packTrip" style="max-width:230px"></select></div><div id="packProgress"></div><div class="row" style="margin:12px 0"><input id="newPack" placeholder="添加本次专属物品" style="flex:1;min-width:150px"><button class="btn primary" id="addPack">添加</button><button class="btn" id="regen">重新生成并保留自定义项</button></div><div id="packItems" class="packing-list"></div></div><div class="card"><h2>通用物品库</h2><p class="muted">这里的修改会用于未来旅行，不会自动改变已经生成的清单。</p><div class="row"><input id="newBase" placeholder="添加通用物品" style="flex:1"><button class="btn" id="addBase">添加</button></div><div id="baseItems" class="packing-list"></div></div></section>
 <section class="pane" id="guides"><div class="card"><div class="row spread"><h2>逐日攻略 · 交通路线</h2><select id="guideTrip" style="max-width:230px"></select></div><p class="muted">可直接修改每天的酒店、路线、游玩攻略和交通信息。路线为可编辑草稿，实际班次请出行前核实。</p><div id="dayList" class="days"></div><div class="row" style="margin-top:14px"><button class="btn primary" id="addDay">＋ 添加一天</button><button class="btn" id="saveDays">保存每日攻略</button></div></div></section>
 <section class="pane" id="memories"><div class="card"><h2>旅行回忆</h2><label class="field">选择旅行<select id="memoryTrip"></select></label><label class="field" style="margin-top:12px">实际旅行记录、喜欢的店、花费、感受<textarea id="memoryText" style="min-height:170px"></textarea></label><button class="btn primary" id="saveMemory" style="margin-top:12px">保存记录</button><p class="muted">照片建议先保存云盘链接或相册备注；当前版本不上传照片文件。</p></div></section>
 <section class="pane" id="editor"><div class="card"><h2>可视化编辑后台</h2><p class="muted">直接调整标题、主题颜色、首页显示内容；不需要改代码。</p><label class="field">App 名称<input id="editTitle"></label><div class="sectionTitle">主题颜色</div><div class="swatches" id="swatches"><button class="swatch" data-color="#4f7865" style="background:#4f7865" aria-label="森林绿"></button><button class="swatch" data-color="#8b758c" style="background:#8b758c" aria-label="灰紫"></button><button class="swatch" data-color="#9b775b" style="background:#9b775b" aria-label="暖棕"></button><button class="swatch" data-color="#527b96" style="background:#527b96" aria-label="雾蓝"></button></div><div class="sectionTitle">首页模块</div><label class="item"><input type="checkbox" id="showStats">显示旅行足迹统计</label><label class="item"><input type="checkbox" id="showRecent">显示最近旅行</label><button class="btn primary" id="saveEditor" style="margin-top:14px">保存界面设置</button></div></section>
